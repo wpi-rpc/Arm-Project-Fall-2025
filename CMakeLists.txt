@@ -34,8 +34,10 @@ project(4DOFArm C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
-add_executable(4DOFArm 4DOFArm.cpp )
+add_executable(4DOFArm
+    4DOFArm.cpp
+    stepper-module/stepper-module.cpp
+)
 
 pico_set_program_name(4DOFArm "4DOFArm")
 pico_set_program_version(4DOFArm "0.1")
@@ -54,10 +56,11 @@ target_link_libraries(4DOFArm
 # Add the standard include files to the build
 target_include_directories(4DOFArm PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/stepper-module
 )
 
 # Add any user requested libraries
-target_link_libraries(4DOFArm 
+target_link_libraries(4DOFArm
         hardware_spi
         hardware_i2c
         hardware_pio
@@ -65,4 +68,3 @@ target_link_libraries(4DOFArm
         )
 
 pico_add_extra_outputs(4DOFArm)
-
